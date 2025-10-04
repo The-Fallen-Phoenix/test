@@ -1,7 +1,9 @@
-name: Test Workflow
+name: Test Workflow with Cache
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -11,5 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step: Use cache
+      - name: prime-cache-57fa9e8
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache
+          key: cache-57fa9e8
+      - name: Check cache result
+        run: echo "Cache hit or miss: ${{ steps.cache-deps.outputs.cache-hit }}"
+
+      # Your earlier step
       - name: 24f3001829@ds.study.iitm.ac.in
-        run: echo "Hello, world! Workflow triggered successfully."
+        run: echo "Hello, world!"
