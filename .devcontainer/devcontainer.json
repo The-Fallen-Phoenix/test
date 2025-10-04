@@ -11,5 +11,5 @@
       ]
     }
   },
-  "postCreateCommand": "uv pip install fastapi"
+  "postCreateCommand": "uv pip install fastapi uvicorn"
 }
